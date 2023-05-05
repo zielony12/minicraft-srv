@@ -1,0 +1,30 @@
+<project name="minicraft-srv" default="dist" basedir=".">
+	<property name="main-class" value="io.github.zielony12.minicraftsrv.Server" />
+	<property name="src.dir" value="src" />
+	<property name="build.dir" value="build" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	<property name="dist.dir" value="${build.dir}/lib" />
+	<property name="output.file" value="${dist.dir}/minicraft-srv.jar" />
+
+	<target name="init">
+		<tstamp />
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${dist.dir}" />
+	</target>
+	<target name="compile" depends="init">
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" >
+		</javac>
+	</target>
+	<target name="dist" depends="compile">
+		<mkdir dir="${dist.dir}" />
+		<jar jarfile="${output.file}" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}" />
+			</manifest>
+		</jar>
+	</target>
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+</project>
